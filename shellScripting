@@ -1,0 +1,16 @@
+#!/bin/bash
+
+timestamp=$(date +%Y-%m-%dT%H-%M)
+filename="/home/ubuntu/kernel-logs-${timestamp}.txt"
+filetxt="${filename}.txt"
+filezip="${filename}.bz2"
+
+chmod 777 "$filetxt.txt"
+chmod 777 "$filezip.bz2"
+
+sudo journalctl -k --since "1 hour ago" > "$filetxt"
+
+
+sudo journalctl -k --since "1 hour ago" > "$filezip.bz2"
+dbxcli put "$filezip.bz2"
+
